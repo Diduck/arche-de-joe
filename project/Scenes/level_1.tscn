@@ -1,3 +1,20 @@
 [gd_scene format=3 uid="uid://buey7en1s6xq6"]
 
+[ext_resource type="PackedScene" uid="uid://c4ng48s1ped4x" path="res://Characters/player.tscn" id="1_vk57k"]
+[ext_resource type="PackedScene" uid="uid://41xwr21ggb7" path="res://Scenes/game_management.tscn" id="2_8ffim"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfk5q"]
+size = Vector2(695.5, 176)
+
 [node name="Level 1" type="Node2D" unique_id=764576289]
+
+[node name="player" parent="." unique_id=1632185841 instance=ExtResource("1_vk57k")]
+position = Vector2(346, 125)
+
+[node name="GameManagement" parent="." unique_id=1022396399 instance=ExtResource("2_8ffim")]
+
+[node name="Wall" type="StaticBody2D" parent="." unique_id=640301911]
+position = Vector2(463, 334)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall" unique_id=1080643989]
+shape = SubResource("RectangleShape2D_xfk5q")
