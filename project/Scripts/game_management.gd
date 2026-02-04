@@ -17,7 +17,9 @@ var zone_interaction = {
 		false
 	]
 }
-var current_animal_label: Label = null  
+var current_animal_label: Label = null
+var player: CharacterBody2D = null
+var characters: Array = []  # Liste des personnages à comparer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,7 +40,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	update_z_index()
 	
 	
 
@@ -46,3 +48,28 @@ func show_hud_mission(text: String):
 	label_mission.text = text
 	label_mission.show()
 	return
+
+func register_character(character: Node2D) -> void:
+	if character not in characters:
+		characters.append(character)
+
+func unregister_character(character: Node2D) -> void:
+	characters.erase(character)
+
+func update_z_index() -> void:
+	if player == null:
+		return
+
+	# Z_index de base pour le player (au dessus du tilemap)
+	var base_z = 1
+
+	for character in characters:
+		if character == null:
+			continue
+		# Si le player est en dessous du character (position.y plus grande)
+		if player.global_position.y > character.global_position.y:
+			# Player devant le character
+			player.z_index = character.z_index + 1
+		else:
+			# Player derrière le character
+			player.z_index = character.z_index - 1

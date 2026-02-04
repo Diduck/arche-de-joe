@@ -20,8 +20,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_65n15"]
-radius = 22.0
-height = 88.0
+radius = 16.0
+height = 32.0
 
 [node name="player" type="CharacterBody2D" unique_id=1632185841]
 script = ExtResource("1_5mj4t")
@@ -31,6 +31,7 @@ sprite_frames = SubResource("SpriteFrames_vb825")
 animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1483930950]
+position = Vector2(1, 29)
 shape = SubResource("CapsuleShape2D_65n15")
 
 [node name="DashTimer" type="Timer" parent="." unique_id=355645480]
@@ -39,6 +40,8 @@ one_shot = true
 
 [node name="ThermoTimer" type="Timer" parent="." unique_id=253888020]
 script = ExtResource("3_vb825")
+
+[node name="TimerPoisson" type="Timer" parent="." unique_id=1226239399]
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="ThermoTimer" to="ThermoTimer" method="_on_timeout"]

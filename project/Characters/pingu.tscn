@@ -20,8 +20,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gpod6"]
-radius = 22.0
-height = 88.0
+radius = 21.0
+height = 42.0
 
 [node name="pingu" type="CharacterBody2D" unique_id=1936606144]
 script = ExtResource("1_5xtct")
@@ -31,6 +31,7 @@ sprite_frames = SubResource("SpriteFrames_5xtct")
 animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1297594469]
+position = Vector2(1, 23)
 shape = SubResource("CapsuleShape2D_gpod6")
 
 [node name="animal" parent="." unique_id=837284782 instance=ExtResource("3_gpod6")]

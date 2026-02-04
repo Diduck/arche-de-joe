@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b1pa6rj3u6hpy"]
 
-[ext_resource type="Script" uid="uid://dd4kgp2surd3t" path="res://SCripts/area_recolte_poisson.gd" id="1_y702m"]
+[ext_resource type="Script" uid="uid://dd4kgp2surd3t" path="res://Scripts/area_recolte_poisson.gd" id="1_y702m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mm8tq"]
 size = Vector2(261, 519.75)
@@ -17,6 +17,12 @@ script = ExtResource("1_y702m")
 position = Vector2(16.5, -76)
 shape = SubResource("RectangleShape2D_mm8tq")
 
+[node name="SpawnTimer" type="Timer" parent="AreaRecoltePoisson" unique_id=1289086720]
+one_shot = true
+
+[node name="DisponibleTimer" type="Timer" parent="AreaRecoltePoisson" unique_id=1915119628]
+one_shot = true
+
 [node name="poisson_label" type="Label" parent="." unique_id=850406979]
 offset_left = -30.0
 offset_top = -124.0
@@ -29,3 +35,5 @@ autowrap_mode = 2
 [connection signal="area_exited" from="AreaRecoltePoisson" to="AreaRecoltePoisson" method="_on_area_exited"]
 [connection signal="body_entered" from="AreaRecoltePoisson" to="AreaRecoltePoisson" method="_on_body_entered"]
 [connection signal="body_exited" from="AreaRecoltePoisson" to="AreaRecoltePoisson" method="_on_body_exited"]
+[connection signal="timeout" from="AreaRecoltePoisson/SpawnTimer" to="AreaRecoltePoisson" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="AreaRecoltePoisson/DisponibleTimer" to="AreaRecoltePoisson" method="_on_disponible_timer_timeout"]

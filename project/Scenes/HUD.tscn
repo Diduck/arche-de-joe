@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://2bn1jutob5h8" path="res://Assets/Asset_thermo-1.png" id="2_xl2bi"]
 [ext_resource type="Texture2D" uid="uid://4grlo3ph2eea" path="res://Assets/Asset_thermo-2.png" id="3_sgqb4"]
 [ext_resource type="Script" uid="uid://b75d50kxqbb26" path="res://Scripts/progress_bar.gd" id="4_xgexb"]
+[ext_resource type="Script" uid="uid://dien7ja7khqdb" path="res://Scripts/thermo_timer.gd" id="5_c3eba"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ps8e7"]
 font_size = 30
@@ -14,7 +15,7 @@ script = ExtResource("1_3t4qu")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=541112306]
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer" unique_id=1711232326]
-anchors_preset = -1
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -117.0
@@ -37,8 +38,11 @@ offset_top = 1.0
 offset_right = 215.0
 offset_bottom = 101.0
 grow_horizontal = 2
-text = "ezbveirve fbrdb rghrhg"
+text = "Ma mission"
 label_settings = SubResource("LabelSettings_ps8e7")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="Timer" type="Timer" parent="CanvasLayer" unique_id=327138035]
+script = ExtResource("5_c3eba")
