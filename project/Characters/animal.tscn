@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://kp7raweoxcps"]
+
+[ext_resource type="Script" uid="uid://drngau843efc2" path="res://Scripts/animal.gd" id="1_gdxel"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vdy0q"]
+radius = 176.28386
+
+[sub_resource type="LabelSettings" id="LabelSettings_vdy0q"]
+font_size = 30
+
+[node name="animal" type="CharacterBody2D" unique_id=837284782]
+script = ExtResource("1_gdxel")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1374274821]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=729579228]
+shape = SubResource("CircleShape2D_vdy0q")
+
+[node name="animal_label" type="Label" parent="." unique_id=628377894]
+offset_left = 32.0
+offset_top = -116.0
+offset_right = 787.0
+offset_bottom = 163.0
+text = "Appuie sur E pour me
+parler."
+label_settings = SubResource("LabelSettings_vdy0q")
+autowrap_mode = 2
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]
+[connection signal="ready" from="animal_label" to="." method="_on_label_ready"]

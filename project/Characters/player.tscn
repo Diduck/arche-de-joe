@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://1ib7o2h5ebhe" path="res://Scripts/player.gd" id="1_5mj4t"]
 [ext_resource type="Texture2D" uid="uid://jl63r7j4ms6b" path="res://Assets/p1_spritesheet.png" id="2_eovys"]
+[ext_resource type="Script" uid="uid://dien7ja7khqdb" path="res://Scripts/thermo_timer.gd" id="3_vb825"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eovys"]
 atlas = ExtResource("2_eovys")
@@ -31,3 +32,13 @@ animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1483930950]
 shape = SubResource("CapsuleShape2D_65n15")
+
+[node name="DashTimer" type="Timer" parent="." unique_id=355645480]
+wait_time = 2.0
+one_shot = true
+
+[node name="ThermoTimer" type="Timer" parent="." unique_id=253888020]
+script = ExtResource("3_vb825")
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="ThermoTimer" to="ThermoTimer" method="_on_timeout"]

@@ -15,6 +15,10 @@ run/main_scene="uid://buey7en1s6xq6"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManagement="*uid://41xwr21ggb7"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
@@ -22,3 +26,5 @@ config/icon="res://icon.svg"
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://d14ax1ly1xt7p"]
+
+[ext_resource type="Script" uid="uid://lkktsrcuy4bi" path="res://Scripts/pingu.gd" id="1_5xtct"]
+[ext_resource type="Texture2D" uid="uid://jl63r7j4ms6b" path="res://Assets/p1_spritesheet.png" id="1_28ts0"]
+[ext_resource type="PackedScene" uid="uid://kp7raweoxcps" path="res://Characters/animal.tscn" id="3_gpod6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xtct"]
+atlas = ExtResource("1_28ts0")
+region = Rect2(432, 96, 72, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5xtct"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xtct")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gpod6"]
+radius = 22.0
+height = 88.0
+
+[node name="pingu" type="CharacterBody2D" unique_id=1936606144]
+script = ExtResource("1_5xtct")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1045380756]
+sprite_frames = SubResource("SpriteFrames_5xtct")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1297594469]
+shape = SubResource("CapsuleShape2D_gpod6")
+
+[node name="animal" parent="." unique_id=837284782 instance=ExtResource("3_gpod6")]
+position = Vector2(0, 1)
