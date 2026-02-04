@@ -10,7 +10,7 @@ var zone_interaction = {
 	"pingu": [
 		"Attraper 5 poissons pour pingu",
 		{
-			"Question": ["Les poissons se font rares, depuisson passage, je meurs de faim, peux-tu m'aider ?", false],
+			"Question": ["Les poissons se font rares, depuis son passage, je meurs de faim, peux-tu m'aider ?", false],
 			"Quête": ["Nombre de poissons", 0, 5],
 			"Solution": ["Je te remercie, je te suivrai pour t'aider dans ton combat, en attendant voici un petit quelque chose", false]
 		},
@@ -48,6 +48,10 @@ func show_hud_mission(text: String):
 	label_mission.text = text
 	label_mission.show()
 	return
+	
+func hide_hud_mission():
+	label_mission.hide()
+	return
 
 func register_character(character: Node2D) -> void:
 	if character not in characters:
@@ -73,3 +77,13 @@ func update_z_index() -> void:
 		else:
 			# Player derrière le character
 			player.z_index = character.z_index - 1
+
+
+
+func augmenter_temperature(amount: float = 1.0) -> void:
+	temperature = clamp(temperature + amount, 0, 100)
+	
+
+func diminuer_temperature(amount: float = 1.0) -> void:
+	temperature = clamp(temperature - amount, 0, 100)
+	

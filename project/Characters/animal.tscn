@@ -7,6 +7,8 @@ radius = 176.28386
 
 [sub_resource type="LabelSettings" id="LabelSettings_vdy0q"]
 font_size = 30
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.60784316)
 
 [node name="animal" type="CharacterBody2D" unique_id=837284782]
 script = ExtResource("1_gdxel")
@@ -17,13 +19,13 @@ script = ExtResource("1_gdxel")
 shape = SubResource("CircleShape2D_vdy0q")
 
 [node name="animal_label" type="Label" parent="." unique_id=628377894]
-offset_left = 32.0
-offset_top = -116.0
-offset_right = 787.0
-offset_bottom = 163.0
-text = "Appuie sur E pour me
-parler."
+offset_left = 124.0
+offset_top = -172.0
+offset_right = 546.0
+offset_bottom = 107.0
+text = "Appuie sur E pour me parler."
 label_settings = SubResource("LabelSettings_vdy0q")
+vertical_alignment = 1
 autowrap_mode = 2
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

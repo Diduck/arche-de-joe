@@ -3,10 +3,12 @@
 [ext_resource type="Script" uid="uid://dd4kgp2surd3t" path="res://Scripts/area_recolte_poisson.gd" id="1_y702m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mm8tq"]
-size = Vector2(261, 519.75)
+size = Vector2(261, 409.875)
 
 [sub_resource type="LabelSettings" id="LabelSettings_y702m"]
 font_size = 30
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.60784316)
 
 [node name="Poissons" type="Node2D" unique_id=1543984182]
 
@@ -14,7 +16,7 @@ font_size = 30
 script = ExtResource("1_y702m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaRecoltePoisson" unique_id=1033032740]
-position = Vector2(16.5, -76)
+position = Vector2(16.5, -21.0625)
 shape = SubResource("RectangleShape2D_mm8tq")
 
 [node name="SpawnTimer" type="Timer" parent="AreaRecoltePoisson" unique_id=1289086720]
@@ -26,7 +28,7 @@ one_shot = true
 [node name="poisson_label" type="Label" parent="." unique_id=850406979]
 offset_left = -30.0
 offset_top = -124.0
-offset_right = 431.0
+offset_right = 383.0
 offset_bottom = 155.0
 text = "Appuie sur E pour attraper les poissons quand tu les voient"
 label_settings = SubResource("LabelSettings_y702m")

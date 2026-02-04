@@ -2,6 +2,7 @@ extends CharacterBody2D
 @onready var dash_timer: Timer = $DashTimer
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var area_recolte_poisson: Node2D = $"../Poissons/AreaRecoltePoisson"
+@onready var cooldown_e: Timer = $CouldownE
 
 var SPEED = 250.0
 var ACCELERATION = 2000
@@ -9,6 +10,7 @@ var FRICTION = 2000
 
 var can_dash: bool = true
 var e_pressed: bool = false
+var e_cooldown: bool = false
 
 func _ready() -> void:
 	GameManagement.player = self
@@ -34,8 +36,10 @@ func _physics_process(delta: float) -> void:
 			dash_timer.start()
 	
 	# Interaction PNJ
-	if Input.is_key_pressed(KEY_E) and not e_pressed and GameManagement.zone_interaction_active != null:
+	if Input.is_key_pressed(KEY_E) and not e_pressed and not e_cooldown and GameManagement.zone_interaction_active != null:
 		e_pressed = true
+		e_cooldown = true
+		cooldown_e.start()
 		var pnj = GameManagement.zone_interaction_active
 		if pnj != "poisson":
 			var quest_data = GameManagement.zone_interaction[pnj][1]
@@ -51,6 +55,9 @@ func _physics_process(delta: float) -> void:
 				else:
 					if value[1] == false:
 						value[1] = null
+						if key == "Solution":
+							eat()
+							GameManagement.hide_hud_mission()
 						GameManagement.current_animal_label.text = value[0]
 						break
 					elif value[1] == null:
@@ -58,11 +65,12 @@ func _physics_process(delta: float) -> void:
 						continue
 		else: #Interaction poisson
 			if area_recolte_poisson.poisson_can_recolte == true:
-				area_recolte_poisson.poisson_can_recolte = false
-				GameManagement.zone_interaction["pingu"][1]["Quête"][1] += 1
-				GameManagement.current_animal_label.text = str(GameManagement.zone_interaction["pingu"][1]["Quête"][0]) + " : " + str(GameManagement.zone_interaction["pingu"][1]["Quête"][1]) + " / " + str(GameManagement.zone_interaction["pingu"][1]["Quête"][2])
-				print("Le joueur vient de récolter un poisson : " + str(GameManagement.zone_interaction["pingu"][1]["Quête"][1]) + " / " + str(GameManagement.zone_interaction["pingu"][1]["Quête"][2]))
-				
+				if GameManagement.current_animal_label: #A d'abord parlé à l'animal
+					area_recolte_poisson.poisson_can_recolte = false
+					GameManagement.zone_interaction["pingu"][1]["Quête"][1] += 1
+					GameManagement.current_animal_label.text = str(GameManagement.zone_interaction["pingu"][1]["Quête"][0]) + " : " + str(GameManagement.zone_interaction["pingu"][1]["Quête"][1]) + " / " + str(GameManagement.zone_interaction["pingu"][1]["Quête"][2])
+					print("Le joueur vient de récolter un poisson : " + str(GameManagement.zone_interaction["pingu"][1]["Quête"][1]) + " / " + str(GameManagement.zone_interaction["pingu"][1]["Quête"][2]))
+					
 	if not Input.is_key_pressed(KEY_E):
 		e_pressed = false
 
@@ -81,5 +89,11 @@ func update_physics_values():
 func _on_dash_timer_timeout() -> void:
 	can_dash = true
 
+
+func eat():
+	GameManagement.diminuer_temperature(20)
+
+func _on_couldown_e_timeout() -> void:
+	e_cooldown = false
 	
 	

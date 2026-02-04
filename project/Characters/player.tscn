@@ -43,5 +43,8 @@ script = ExtResource("3_vb825")
 
 [node name="TimerPoisson" type="Timer" parent="." unique_id=1226239399]
 
+[node name="CouldownE" type="Timer" parent="." unique_id=1551904104]
+
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="ThermoTimer" to="ThermoTimer" method="_on_timeout"]
+[connection signal="timeout" from="CouldownE" to="." method="_on_couldown_e_timeout"]
