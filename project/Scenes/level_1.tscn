@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d14ax1ly1xt7p" path="res://Characters/pingu.tscn" id="5_6444e"]
 [ext_resource type="Texture2D" uid="uid://bw0n15be4yxrb" path="res://Assets/asset1.png" id="5_lsmp6"]
 [ext_resource type="PackedScene" uid="uid://b1pa6rj3u6hpy" path="res://Scenes/poissons.tscn" id="6_evi0p"]
+[ext_resource type="PackedScene" uid="uid://c0e60cpfundnr" path="res://Scenes/finish.tscn" id="7_lsmp6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xfk5q"]
 size = Vector2(626, 144)
@@ -116,3 +117,6 @@ position = Vector2(96, 0)
 
 [node name="Poissons" parent="." unique_id=1543984182 instance=ExtResource("6_evi0p")]
 position = Vector2(1344, 348)
+
+[node name="Finish" parent="." unique_id=1888213372 instance=ExtResource("7_lsmp6")]
+position = Vector2(725, -279)

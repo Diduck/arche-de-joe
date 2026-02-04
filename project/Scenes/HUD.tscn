@@ -8,6 +8,8 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_ps8e7"]
 font_size = 30
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.60784316)
 
 [node name="HUD" type="Node2D" unique_id=1052328642]
 script = ExtResource("1_3t4qu")

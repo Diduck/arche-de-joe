@@ -1,3 +1,27 @@
 [gd_scene format=3 uid="uid://dq7gea531r2w1"]
 
-[node name="Menu" type="Node2D" unique_id=1215641340]
+[sub_resource type="LabelSettings" id="LabelSettings_u4yt8"]
+font_size = 30
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.60784316)
+
+[node name="Node2D" type="Node2D" unique_id=1215641340]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=775593143]
+
+[node name="mission_label" type="Label" parent="CanvasLayer" unique_id=26363726]
+anchors_preset = -1
+anchor_left = 0.497
+anchor_top = 0.5
+anchor_right = 0.497
+anchor_bottom = 0.5
+offset_left = -215.544
+offset_top = -57.0
+offset_right = 216.456
+offset_bottom = 43.0
+grow_horizontal = 2
+text = "GG, tu vas sur le prochain niveau."
+label_settings = SubResource("LabelSettings_u4yt8")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
