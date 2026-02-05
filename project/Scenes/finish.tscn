@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://5n8ywydg1fdc" path="res://Scripts/finish.gd" id="1_nv66a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ev6x2"]
-size = Vector2(2654, 117.375)
+size = Vector2(214, 67.5)
 
 [node name="Finish" type="Node2D" unique_id=1888213372]
 script = ExtResource("1_nv66a")
@@ -11,7 +11,6 @@ script = ExtResource("1_nv66a")
 [node name="Area2D" type="Area2D" parent="." unique_id=57349847]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1731389762]
-position = Vector2(1231, 30.3125)
 shape = SubResource("RectangleShape2D_ev6x2")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
