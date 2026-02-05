@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cygy0rwa2tdlv"]
+
+[ext_resource type="Texture2D" uid="uid://blj1gqoiaib4r" path="res://Assets/GLACE.png" id="1_0dd4d"]
+[ext_resource type="Script" uid="uid://dw32i1l5eiygn" path="res://Scenes/glace.gd" id="1_50p4t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0dd4d"]
+radius = 16.27882
+
+[node name="Glace" type="Area2D" unique_id=1514371351]
+script = ExtResource("1_50p4t")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1708152431]
+texture = ExtResource("1_0dd4d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=335306324]
+shape = SubResource("CircleShape2D_0dd4d")
+
+[node name="Label" type="Label" parent="." unique_id=994753811]
+offset_left = 12.0
+offset_top = -13.0
+offset_right = 96.0
+offset_bottom = 10.0
+text = "E : Prendre"

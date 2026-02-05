@@ -1,18 +1,14 @@
 [gd_scene format=3 uid="uid://d14ax1ly1xt7p"]
 
 [ext_resource type="Script" uid="uid://lkktsrcuy4bi" path="res://Scripts/pingu.gd" id="1_5xtct"]
-[ext_resource type="Texture2D" uid="uid://jl63r7j4ms6b" path="res://Assets/p1_spritesheet.png" id="1_28ts0"]
+[ext_resource type="Texture2D" uid="uid://cylso0hw276tb" path="res://Assets/Pinguin/pingouin face.png" id="2_dom53"]
 [ext_resource type="PackedScene" uid="uid://kp7raweoxcps" path="res://Characters/animal.tscn" id="3_gpod6"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5xtct"]
-atlas = ExtResource("1_28ts0")
-region = Rect2(432, 96, 72, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5xtct"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5xtct")
+"texture": ExtResource("2_dom53")
 }],
 "loop": true,
 "name": &"Idle",
