@@ -3,7 +3,7 @@ extends CharacterBody2D
 # --- LIENS ---
 @onready var dash_timer: Timer = $DashTimer
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var area_recolte_poisson: Node2D = $"../Poissons/AreaRecoltePoisson"
+var area_recolte_poisson: Node2D = null
 @onready var cooldown_e: Timer = $CouldownE
 
 # --- REGLAGES VITESSE ---
@@ -13,8 +13,15 @@ var FRICTION = 2000
 
 # --- ETATS ---
 var can_dash: bool = true
+var is_dashing: bool = false
+var dash_direction: Vector2 = Vector2.ZERO
 var e_pressed: bool = false
 var e_cooldown: bool = false
+
+# --- DASH ---
+var DASH_SPEED: float = 400.0       # Vitesse pendant le dash
+var DASH_DURATION: float = 0.15     # Durée du dash en secondes
+var dash_time_left: float = 0.0
 
 # --- SAUT (FAUSSE 3D) ---
 var z_position: float = 0.0 
@@ -58,20 +65,29 @@ func _physics_process(delta: float) -> void:
 	update_animations(direction)
 	update_physics_values()
 
-	# --- 3. DEPLACEMENTS ---
-	if direction != Vector2.ZERO:
-		velocity = velocity.move_toward(direction * SPEED, ACCELERATION * delta)
-	else:
-		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-	
-	move_and_slide()
+	# --- 3. DASH ---
+	if Input.is_key_pressed(KEY_SHIFT) and can_dash and direction != Vector2.ZERO:
+		# Lancer le dash
+		is_dashing = true
+		dash_time_left = DASH_DURATION
+		dash_direction = direction.normalized()
+		can_dash = false
+		dash_timer.start()
 
-	# --- 4. DASH ---
-	if Input.is_key_pressed(KEY_SHIFT) and can_dash:
-		if !aside_climb():
-			velocity = velocity.move_toward(direction * SPEED * 3, 2000 * delta)
-			can_dash = false
-			dash_timer.start()
+	if is_dashing:
+		# Pendant le dash : vitesse fixe et puissante
+		dash_time_left -= delta
+		velocity = dash_direction * DASH_SPEED
+		if dash_time_left <= 0:
+			is_dashing = false
+	else:
+		# --- 4. DEPLACEMENTS NORMAUX ---
+		if direction != Vector2.ZERO:
+			velocity = velocity.move_toward(direction * SPEED, ACCELERATION * delta)
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+
+	move_and_slide()
 	
 	# --- 5. INTERACTIONS (Quêtes & Dialogues) ---
 	if Input.is_key_pressed(KEY_E) and not e_pressed and not e_cooldown and GameManagement.zone_interaction_active != null:
@@ -85,9 +101,9 @@ func _physics_process(delta: float) -> void:
 				var value = quest_data[key]
 				if key == "Quête":
 					if value[1] < value[2]:
-						GameManagement.zone_interaction[pnj][2] = true 
+						GameManagement.zone_interaction[pnj][2] = true
 						GameManagement.show_hud_mission(GameManagement.zone_interaction[pnj][0])
-						GameManagement.current_animal_label.text = value[0] + " : " + str(value[1]) + " / " + str(value[2])
+						GameManagement.current_animal_label.text = value[0] + " : " + str(value[1]) + " / " + str(value[2]) + "\n -> [E]"
 						break
 				else:
 					if value[1] == false:
@@ -95,13 +111,16 @@ func _physics_process(delta: float) -> void:
 						if key == "Solution":
 							eat()
 							GameManagement.hide_hud_mission()
-						GameManagement.current_animal_label.text = value[0]
+						GameManagement.current_animal_label.text = value[0] + "\n -> [E]"
 						break
 					elif value[1] == null:
-						value[1] = true		
+						value[1] = true
+						if key == "Solution":
+							# Quête terminée, cacher le label
+							GameManagement.current_animal_label.hide()
 						continue
 		else: # Poisson
-			if area_recolte_poisson.poisson_can_recolte == true:
+			if area_recolte_poisson and area_recolte_poisson.poisson_can_recolte == true:
 				if GameManagement.current_animal_label: 
 					area_recolte_poisson.poisson_can_recolte = false
 					GameManagement.zone_interaction["pingu"][1]["Quête"][1] += 1
@@ -146,10 +165,26 @@ func gerer_saut(delta):
 
 # --- GESTION DES ANIMATIONS (CORRIGÉE POUR GAUCHER) ---
 func update_animations(direction):
-	# 1. SAUT (Priorité absolue)
+	# 1. DASH + SAUT : la glisse prend le dessus
 	if z_position < 0:
-		sprite.play("jump")
-		return 
+		if is_dashing:
+			# Glisse prioritaire sur le saut
+			if direction_regard == "cote":
+				sprite.play("glisse")
+				if dash_direction.x < 0:
+					sprite.flip_h = false
+				else:
+					sprite.flip_h = true
+			elif direction_regard == "face":
+				sprite.play("glisse_devant")
+			else:
+				sprite.play("jump_devant")
+		else:
+			if direction_regard == "dos":
+				sprite.play("jump_devant")
+			else:
+				sprite.play("jump")
+		return
 
 	# 2. SI ON BOUGE
 	if direction.length() > 0:
@@ -157,19 +192,26 @@ func update_animations(direction):
 		if direction.y < 0:
 			sprite.play("run_dos")
 			direction_regard = "dos"
-			sprite.flip_h = false 
-			
+			sprite.flip_h = false
+
 		# Vers le BAS (Face)
 		elif direction.y > 0:
-			sprite.play("run_face")
+			if is_dashing:
+				sprite.play("glisse_devant")
+			else:
+				sprite.play("run_face")
 			direction_regard = "face"
 			sprite.flip_h = false
 
 		# Vers GAUCHE / DROITE (Côté)
 		elif direction.x != 0:
-			sprite.play("run_cote")
+			# Animation glisse si on dash sur les côtés
+			if is_dashing:
+				sprite.play("glisse")
+			else:
+				sprite.play("run_cote")
 			direction_regard = "cote"
-			
+
 			# SPECIALE DEDICACE : Ton sprite regarde à GAUCHE de base.
 			if direction.x < 0:
 				sprite.flip_h = false  # Gauche = Image normale

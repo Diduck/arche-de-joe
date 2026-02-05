@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dc2sflechd1xm"]
+
+[ext_resource type="Script" uid="uid://cmkglr37careu" path="res://Scripts/water.gd" id="1_slmpt"]
+
+[node name="Water" type="Node2D" unique_id=232473984]
+script = ExtResource("1_slmpt")

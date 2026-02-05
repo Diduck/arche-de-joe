@@ -87,3 +87,5 @@ func augmenter_temperature(amount: float = 1.0) -> void:
 func diminuer_temperature(amount: float = 1.0) -> void:
 	temperature = clamp(temperature - amount, 0, 100)
 	
+func respawn():
+	player.position = Vector2(227.0, 1293.0)

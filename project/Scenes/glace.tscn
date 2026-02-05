@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cygy0rwa2tdlv"]
 
 [ext_resource type="Texture2D" uid="uid://blj1gqoiaib4r" path="res://Assets/GLACE.png" id="1_0dd4d"]
-[ext_resource type="Script" uid="uid://dw32i1l5eiygn" path="res://Scenes/glace.gd" id="1_50p4t"]
+[ext_resource type="Script" uid="uid://dw32i1l5eiygn" path="res://Scripts/glace.gd" id="1_50p4t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0dd4d"]
 radius = 16.27882
