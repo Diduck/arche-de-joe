@@ -1,22 +1,86 @@
 [gd_scene format=3 uid="uid://c4ng48s1ped4x"]
 
 [ext_resource type="Script" uid="uid://1ib7o2h5ebhe" path="res://Scripts/player.gd" id="1_5mj4t"]
-[ext_resource type="Texture2D" uid="uid://jl63r7j4ms6b" path="res://Assets/p1_spritesheet.png" id="2_eovys"]
+[ext_resource type="Texture2D" uid="uid://hmac8nkdbnov" path="res://Joe/Joe Debout.png" id="2_5slg2"]
+[ext_resource type="Texture2D" uid="uid://wxmojvjerlbt" path="res://Joe/Joe de dos 1.png" id="3_cbmiu"]
 [ext_resource type="Script" uid="uid://dien7ja7khqdb" path="res://Scripts/thermo_timer.gd" id="3_vb825"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eovys"]
-atlas = ExtResource("2_eovys")
-region = Rect2(0, 0, 72, 96)
+[ext_resource type="Texture2D" uid="uid://ro3c771f8nht" path="res://Joe/Joe Saute Cote.png" id="4_w3rah"]
+[ext_resource type="Texture2D" uid="uid://sq68mrkugppo" path="res://Joe/Joe Cours 3.png" id="5_642pg"]
+[ext_resource type="Texture2D" uid="uid://i0nyqsaaj6x7" path="res://Joe/Joe Cours 1.png" id="5_c4gpq"]
+[ext_resource type="Texture2D" uid="uid://d2e5l1rvuuxn8" path="res://Joe/Joe de dos 2.png" id="6_642pg"]
+[ext_resource type="Texture2D" uid="uid://brfxqinjybd2e" path="res://Joe/Joe Cours 2.png" id="7_22qw1"]
+[ext_resource type="Texture2D" uid="uid://didcp3au3hm34" path="res://Joe/Joe de face marche copie 2.png" id="7_q6x5r"]
+[ext_resource type="Texture2D" uid="uid://cj2vr1cxt7wr" path="res://Joe/Joe marche face 1.png" id="9_mevwr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vb825"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_eovys")
+"texture": ExtResource("2_5slg2")
 }],
 "loop": true,
-"name": &"Idle",
-"speed": 5.0
+"name": &"idle_cote",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_cbmiu")
+}],
+"loop": true,
+"name": &"idle_dos",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5slg2")
+}],
+"loop": true,
+"name": &"idle_face",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_w3rah")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_642pg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_c4gpq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_22qw1")
+}],
+"loop": true,
+"name": &"run_cote",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_cbmiu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_642pg")
+}],
+"loop": true,
+"name": &"run_dos",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_mevwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_q6x5r")
+}],
+"loop": true,
+"name": &"run_face",
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_65n15"]
@@ -28,7 +92,7 @@ script = ExtResource("1_5mj4t")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=387302344]
 sprite_frames = SubResource("SpriteFrames_vb825")
-animation = &"Idle"
+animation = &"run_face"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1483930950]
 position = Vector2(1, 29)
