@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cygy0rwa2tdlv" path="res://Scenes/glace.tscn" id="8_xrdnt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xfk5q"]
-size = Vector2(2087, 187.50006)
+size = Vector2(2230, 187.50006)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xrdnt"]
 texture = ExtResource("5_lsmp6")
@@ -325,8 +325,9 @@ position = Vector2(347, 125)
 position = Vector2(-8, 1)
 zoom = Vector2(1.5, 1.5)
 limit_left = 150
-limit_top = 2300
+limit_top = -2400
 limit_right = 2300
+limit_bottom = 400
 
 [node name="HUD" parent="player/Camera2D" unique_id=1052328642 instance=ExtResource("3_evi0p")]
 position = Vector2(-174, -210)
@@ -336,10 +337,17 @@ position = Vector2(-174, -210)
 [node name="Wall" type="StaticBody2D" parent="." unique_id=640301911]
 position = Vector2(463, 334)
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall" unique_id=461129309]
+position = Vector2(740, 73.5)
+rotation = -3.1415925
+shape = SubResource("RectangleShape2D_xfk5q")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall" unique_id=1080643989]
-position = Vector2(-241.25, -986.5)
+position = Vector2(-241.25, -1058)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_xfk5q")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Wall" unique_id=1083865497]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1492890917]
 z_index = -10
@@ -353,7 +361,7 @@ position = Vector2(861, -345)
 position = Vector2(766, -622)
 
 [node name="Finish" parent="." unique_id=1888213372 instance=ExtResource("7_lsmp6")]
-position = Vector2(790, -2394)
+position = Vector2(-169, -2399)
 
 [node name="Glace" parent="." unique_id=1514371351 instance=ExtResource("8_xrdnt")]
 position = Vector2(1121, -179)
