@@ -7,8 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://bw0n15be4yxrb" path="res://Assets/asset1.png" id="5_lsmp6"]
 [ext_resource type="Texture2D" uid="uid://cljqc1oofvg4o" path="res://Assets/ASSETS-VF4.png" id="5_wrinw"]
 [ext_resource type="PackedScene" uid="uid://b1pa6rj3u6hpy" path="res://Scenes/poissons.tscn" id="6_evi0p"]
-[ext_resource type="PackedScene" uid="uid://c0e60cpfundnr" path="res://Scenes/finish.tscn" id="7_lsmp6"]
+[ext_resource type="Script" uid="uid://5n8ywydg1fdc" path="res://Scripts/finish.gd" id="8_wrinw"]
 [ext_resource type="PackedScene" uid="uid://cygy0rwa2tdlv" path="res://Scenes/glace.tscn" id="8_xrdnt"]
+[ext_resource type="Script" uid="uid://05yp1g2iwbsh" path="res://Scenes/button.gd" id="10_chwpn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xfk5q"]
 size = Vector2(2230, 187.50006)
@@ -313,6 +314,25 @@ sources/1 = SubResource("TileSetAtlasSource_xrdnt")
 sources/32 = SubResource("TileSetAtlasSource_chwpn")
 sources/33 = SubResource("TileSetAtlasSource_af3po")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ev6x2"]
+size = Vector2(2654, 117.375)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_af3po"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0.37254903, 0.58431375, 0.24705882)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+
 [node name="Level 1" type="Node2D" unique_id=764576289]
 position = Vector2(321, 8)
 
@@ -360,8 +380,13 @@ position = Vector2(861, -345)
 [node name="Poissons" parent="." unique_id=1543984182 instance=ExtResource("6_evi0p")]
 position = Vector2(766, -622)
 
-[node name="Finish" parent="." unique_id=1888213372 instance=ExtResource("7_lsmp6")]
+[node name="Finish" type="Area2D" parent="." unique_id=1413336273]
 position = Vector2(-169, -2399)
+script = ExtResource("8_wrinw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Finish" unique_id=1731389762]
+position = Vector2(1231, 30.3125)
+shape = SubResource("RectangleShape2D_ev6x2")
 
 [node name="Glace" parent="." unique_id=1514371351 instance=ExtResource("8_xrdnt")]
 position = Vector2(1121, -179)
@@ -371,3 +396,57 @@ position = Vector2(1017, 418)
 
 [node name="Glace3" parent="." unique_id=11377854 instance=ExtResource("8_xrdnt")]
 position = Vector2(403, -206)
+
+[node name="VictoireInterface" type="CanvasLayer" parent="." unique_id=1104010033]
+process_mode = 3
+layer = 0
+visible = false
+
+[node name="Panel" type="Panel" parent="VictoireInterface" unique_id=343041802]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.5
+offset_top = -54.0
+offset_right = 154.5
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_af3po")
+
+[node name="Label" type="Label" parent="VictoireInterface/Panel" unique_id=981024672]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49500003
+anchor_top = 0.476
+anchor_right = 0.49500003
+anchor_bottom = 0.476
+offset_left = -130.95499
+offset_top = -44.408
+offset_right = 137.04501
+offset_bottom = 19.592
+grow_horizontal = 2
+grow_vertical = 2
+text = "Bravo ! Vous avez gagné le niveau !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="VictoireInterface/Panel" unique_id=1381203003]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.503
+anchor_top = 0.5
+anchor_right = 0.503
+anchor_bottom = 0.5
+offset_left = -67.427
+offset_top = 7.0
+offset_right = 63.572998
+offset_bottom = 38.0
+text = "RECOMMENCER"
+script = ExtResource("10_chwpn")
+
+[connection signal="pressed" from="VictoireInterface/Panel/Button" to="VictoireInterface/Panel/Button" method="_on_pressed"]
